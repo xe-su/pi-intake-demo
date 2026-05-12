@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Lead Intake for Personal Injury Law Firms — Never Miss a Case Again</title>
+  <meta name="description" content="AI-powered 24/7 intake bot for PI law firms. Captures leads, qualifies cases, books consultations automatically. $2,500 setup." />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0a0a0a; color: #f0f0f0; }
+
+    .hero {
+      background: linear-gradient(135deg, #0a0a0a 0%, #0f1a2e 100%);
+      padding: 80px 24px;
+      text-align: center;
+      border-bottom: 1px solid #1e3a5f;
+    }
+    .badge {
+      display: inline-block;
+      background: #1e3a5f;
+      color: #60a5fa;
+      border: 1px solid #3b82f6;
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 13px;
+      margin-bottom: 28px;
+      letter-spacing: 0.5px;
+    }
+    .hero h1 {
+      font-size: clamp(30px, 5vw, 56px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 24px;
+      color: #fff;
+    }
+    .hero h1 span { color: #3b82f6; }
+    .hero p {
+      font-size: 20px;
+      color: #94a3b8;
+      max-width: 650px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: #3b82f6;
+      color: #fff;
+      font-weight: 700;
+      font-size: 17px;
+      padding: 16px 36px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: #2563eb; }
+    .btn-secondary {
+      background: transparent;
+      color: #94a3b8;
+      font-weight: 600;
+      font-size: 17px;
+      padding: 16px 36px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: 1px solid #334155;
+      transition: border-color 0.2s;
+    }
+    .btn-secondary:hover { border-color: #64748b; color: #cbd5e1; }
+
+    /* Stats bar */
+    .stats { background: #111827; border-top: 1px solid #1f2937; border-bottom: 1px solid #1f2937; padding: 32px 24px; }
+    .stats-grid { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; max-width: 800px; margin: 0 auto; }
+    .stat { text-align: center; }
+    .stat .num { font-size: 36px; font-weight: 800; color: #3b82f6; }
+    .stat .label { font-size: 13px; color: #64748b; margin-top: 4px; }
+
+    /* Problem section */
+    .problem { padding: 80px 24px; background: #0a0a0a; }
+    .problem h2 { text-align: center; font-size: 32px; color: #fff; margin-bottom: 48px; }
+    .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; max-width: 900px; margin: 0 auto; }
+    .problem-card { background: #111; border: 1px solid #1f2937; border-radius: 12px; padding: 28px; }
+    .problem-card .icon { font-size: 36px; margin-bottom: 16px; }
+    .problem-card h3 { font-size: 18px; color: #fff; margin-bottom: 10px; }
+    .problem-card p { font-size: 14px; color: #64748b; line-height: 1.6; }
+    .problem-card .cost { color: #ef4444; font-weight: bold; font-size: 15px; margin-top: 10px; }
+
+    /* How it works */
+    .how { padding: 80px 24px; background: #050505; }
+    .how h2 { text-align: center; font-size: 32px; color: #fff; margin-bottom: 12px; }
+    .how .sub { text-align: center; color: #64748b; margin-bottom: 56px; font-size: 16px; }
+    .steps { display: flex; flex-direction: column; gap: 0; max-width: 720px; margin: 0 auto; }
+    .step { display: flex; gap: 24px; align-items: flex-start; padding-bottom: 40px; position: relative; }
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 21px;
+      top: 44px;
+      width: 2px;
+      height: calc(100% - 44px);
+      background: #1f2937;
+    }
+    .step-num {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: #1e3a5f; border: 2px solid #3b82f6;
+      color: #3b82f6; font-weight: 800; font-size: 18px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; position: relative; z-index: 1;
+    }
+    .step-content h3 { font-size: 18px; color: #fff; margin-bottom: 8px; padding-top: 10px; }
+    .step-content p { font-size: 14px; color: #64748b; line-height: 1.6; }
+    .step-content .tag { display: inline-block; background: #0f2a1a; color: #22c55e; border: 1px solid #166534; border-radius: 4px; font-size: 11px; padding: 2px 8px; margin-top: 8px; }
+
+    /* Demo conversation */
+    .demo { padding: 80px 24px; background: #0a0a0a; }
+    .demo h2 { text-align: center; font-size: 32px; color: #fff; margin-bottom: 12px; }
+    .demo .sub { text-align: center; color: #64748b; margin-bottom: 48px; }
+    .chat-frame {
+      max-width: 480px; margin: 0 auto;
+      background: #111; border-radius: 16px;
+      overflow: hidden; border: 1px solid #1f2937;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .chat-header { background: #1e3a5f; padding: 16px 20px; display: flex; align-items: center; gap: 12px; }
+    .chat-avatar { width: 44px; height: 44px; border-radius: 50%; background: #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .chat-header-info h4 { color: #fff; font-size: 15px; }
+    .chat-header-info p { color: #93c5fd; font-size: 12px; }
+    .chat-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .msg { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 14px; line-height: 1.5; }
+    .msg.bot { background: #1f2937; color: #e2e8f0; align-self: flex-start; border-bottom-left-radius: 4px; }
+    .msg.user { background: #1e3a5f; color: #bfdbfe; align-self: flex-end; border-bottom-right-radius: 4px; }
+    .msg-time { font-size: 10px; color: #475569; text-align: right; margin-top: 4px; }
+
+    /* Pricing */
+    .pricing { padding: 80px 24px; background: #050505; }
+    .pricing h2 { text-align: center; font-size: 32px; color: #fff; margin-bottom: 12px; }
+    .pricing .sub { text-align: center; color: #64748b; margin-bottom: 48px; }
+    .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 860px; margin: 0 auto; }
+    .plan { background: #111; border: 1px solid #1f2937; border-radius: 16px; padding: 36px 28px; }
+    .plan.featured { border-color: #3b82f6; position: relative; }
+    .featured-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #3b82f6; color: #fff; font-size: 12px; font-weight: 700; padding: 4px 16px; border-radius: 20px; }
+    .plan h3 { font-size: 20px; color: #fff; margin-bottom: 8px; }
+    .plan .price { font-size: 40px; font-weight: 800; color: #3b82f6; margin-bottom: 4px; }
+    .plan .price span { font-size: 16px; font-weight: 400; color: #64748b; }
+    .plan .retainer { font-size: 14px; color: #475569; margin-bottom: 28px; }
+    .plan ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .plan ul li { font-size: 14px; color: #94a3b8; display: flex; gap: 10px; align-items: flex-start; }
+    .plan ul li::before { content: "✓"; color: #3b82f6; flex-shrink: 0; font-weight: bold; }
+    .plan .cta-btn { display: block; text-align: center; background: #3b82f6; color: #fff; font-weight: 700; padding: 14px; border-radius: 8px; text-decoration: none; margin-top: 28px; font-size: 15px; }
+    .plan.featured .cta-btn:hover { background: #2563eb; }
+    .plan:not(.featured) .cta-btn { background: transparent; border: 1px solid #334155; color: #94a3b8; }
+
+    /* ROI calculator box */
+    .roi { padding: 80px 24px; background: #0a0a0a; }
+    .roi-box { max-width: 700px; margin: 0 auto; background: #111; border: 1px solid #1e3a5f; border-radius: 16px; padding: 40px; text-align: center; }
+    .roi-box h2 { font-size: 28px; color: #fff; margin-bottom: 8px; }
+    .roi-box p { color: #64748b; margin-bottom: 36px; }
+    .roi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 32px; }
+    .roi-item .num { font-size: 32px; font-weight: 800; color: #3b82f6; }
+    .roi-item .label { font-size: 13px; color: #475569; margin-top: 4px; }
+    .roi-result { background: #0f2a1a; border: 1px solid #166534; border-radius: 8px; padding: 20px; }
+    .roi-result p { color: #22c55e; font-size: 18px; font-weight: bold; }
+
+    /* CTA */
+    .cta-section { padding: 100px 24px; background: linear-gradient(135deg, #0f1a2e, #0a0a0a); text-align: center; border-top: 1px solid #1e3a5f; }
+    .cta-section h2 { font-size: 36px; color: #fff; margin-bottom: 16px; }
+    .cta-section p { color: #64748b; margin-bottom: 40px; font-size: 16px; }
+
+    footer { background: #050505; padding: 24px; text-align: center; color: #374151; font-size: 12px; border-top: 1px solid #111; }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="badge">⚡ Built for Personal Injury Law Firms</div>
+    <h1>Stop Losing Cases to <span>Slow Follow-Up</span></h1>
+    <p>Your AI intake bot captures every lead, qualifies cases instantly, and books consultations — 24/7, while you sleep.</p>
+    <div class="hero-btns">
+      <a href="LOOM_DEMO_LINK" class="btn-primary">Watch 2-Min Demo →</a>
+      <a href="CONTACT_LINK" class="btn-secondary">Get a Quote</a>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stats-grid">
+      <div class="stat"><div class="num">15hrs</div><div class="label">Average US firm response time</div></div>
+      <div class="stat"><div class="num">40%</div><div class="label">Leads lost to competitors</div></div>
+      <div class="stat"><div class="num">&lt;90s</div><div class="label">Your AI responds in</div></div>
+      <div class="stat"><div class="num">24/7</div><div class="label">Always on, never sick</div></div>
+    </div>
+  </div>
+
+  <!-- Problem -->
+  <section class="problem">
+    <h2>The Problem Every PI Firm Has</h2>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="icon">😴</div>
+        <h3>After-hours leads disappear</h3>
+        <p>Most accident victims search for lawyers in the evening. When nobody responds until morning, they've already hired your competitor.</p>
+        <div class="cost">Avg loss: $15,000–$50,000/case</div>
+      </div>
+      <div class="problem-card">
+        <div class="icon">📞</div>
+        <h3>Staff can't handle intake volume</h3>
+        <p>Your intake coordinator spends 40% of their time on unqualified leads. Every minute spent on a bad lead is a minute away from a good one.</p>
+        <div class="cost">Staff cost: $3,500–$5,500/month</div>
+      </div>
+      <div class="problem-card">
+        <div class="icon">📋</div>
+        <h3>Inconsistent qualification</h3>
+        <p>Different staff ask different questions. Statute of limitations checks get missed. Cases slip through the cracks.</p>
+        <div class="cost">Risk: Missed high-value cases</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="how">
+    <h2>How It Works</h2>
+    <div class="sub">Set up once. Runs forever. No maintenance from your side.</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Lead arrives (website, Facebook ad, referral)</h3>
+          <p>Your AI intake bot is connected to all your lead sources — web form, chat widget, Facebook Lead Ads.</p>
+          <div class="tag">Within seconds</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>AI qualifies the case automatically</h3>
+          <p>Asks the right questions: injury date, fault, medical treatment, insurance. Flags statute of limitations issues instantly.</p>
+          <div class="tag">Consistent, every time</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Qualified leads book a consultation</h3>
+          <p>AI connects directly to your calendar (Calendly, Acuity, or custom). Consultation booked before you wake up.</p>
+          <div class="tag">While you sleep</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>You review, you decide</h3>
+          <p>Every intake saved with full transcript. Qualified cases flagged with summary. Unqualified ones auto-declined with a referral.</p>
+          <div class="tag">You control the final call</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo chat -->
+  <section class="demo">
+    <h2>See It Live</h2>
+    <div class="sub">Real conversation — AI qualifying a car accident case at 11:47 PM</div>
+    <div class="chat-frame">
+      <div class="chat-header">
+        <div class="chat-avatar">⚖️</div>
+        <div class="chat-header-info">
+          <h4>Martinez & Associates</h4>
+          <p>AI Intake Assistant • Online</p>
+        </div>
+      </div>
+      <div class="chat-body">
+        <div class="msg bot">Hi! I'm the intake assistant for Martinez & Associates. Were you or someone you know recently injured in an accident?<div class="msg-time">11:47 PM</div></div>
+        <div class="msg user">Yes, I was in a car accident last week. The other driver ran a red light.</div>
+        <div class="msg bot">I'm sorry to hear that. I can help connect you with our attorneys. A few quick questions — did you receive any medical treatment after the accident?<div class="msg-time">11:47 PM</div></div>
+        <div class="msg user">Yes, I went to the ER and then a chiropractor.</div>
+        <div class="msg bot">That's important. Was the accident within the last 2 years in your state?<div class="msg-time">11:48 PM</div></div>
+        <div class="msg user">Yes, it was last Tuesday.</div>
+        <div class="msg bot">✅ Based on what you've shared, your case looks like a strong fit for our attorneys.<br/><br/>I have a consultation available tomorrow at 10 AM or 2 PM. Which works better?<div class="msg-time">11:48 PM</div></div>
+        <div class="msg user">10 AM works.</div>
+        <div class="msg bot">
+          Confirmed! Your consultation is booked:<br/><br/>
+          📅 Tomorrow, 10:00 AM<br/>
+          👤 Attorney John Martinez<br/>
+          📞 You'll receive a call at this number<br/><br/>
+          We'll also send you a reminder 30 minutes before. See you tomorrow!
+          <div class="msg-time">11:48 PM ✓</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI -->
+  <section class="roi">
+    <div class="roi-box">
+      <h2>The ROI is Obvious</h2>
+      <p>One additional signed case pays for the entire year.</p>
+      <div class="roi-grid">
+        <div class="roi-item"><div class="num">$25K</div><div class="label">Avg PI case value (contingency)</div></div>
+        <div class="roi-item"><div class="num">2–3</div><div class="label">Extra cases captured per month</div></div>
+        <div class="roi-item"><div class="num">$1,200</div><div class="label">Monthly cost of AI system</div></div>
+      </div>
+      <div class="roi-result">
+        <p>$50,000+ in new case revenue vs $1,200 tool cost = 41x ROI</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing">
+    <h2>Simple Pricing</h2>
+    <div class="sub">No long contracts. Cancel anytime.</div>
+    <div class="plans">
+      <div class="plan">
+        <h3>Starter</h3>
+        <div class="price">$1,500 <span>setup</span></div>
+        <div class="retainer">+ $500/month</div>
+        <ul>
+          <li>24/7 AI intake bot (web + SMS)</li>
+          <li>Basic case qualification</li>
+          <li>Calendar integration</li>
+          <li>Lead log (Google Sheet)</li>
+          <li>Monthly report</li>
+        </ul>
+        <a href="CONTACT_LINK" class="cta-btn">Get Started</a>
+      </div>
+      <div class="plan featured">
+        <div class="featured-badge">Most Popular</div>
+        <h3>Professional</h3>
+        <div class="price">$2,500 <span>setup</span></div>
+        <div class="retainer">+ $1,000/month</div>
+        <ul>
+          <li>Everything in Starter</li>
+          <li>Deep case qualification (SoL check, liability questions)</li>
+          <li>CRM sync (Clio, Filevine, or custom)</li>
+          <li>SMS + email follow-up sequences</li>
+          <li>Unqualified lead referral automation</li>
+          <li>Bi-weekly optimization calls</li>
+        </ul>
+        <a href="CONTACT_LINK" class="cta-btn">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>See It Working on Your Firm's Demo</h2>
+    <p>Watch a 2-minute Loom showing exactly how the bot handles a car accident intake. No calls required.</p>
+    <a href="LOOM_DEMO_LINK" class="btn-primary" style="font-size:18px;padding:18px 44px;">Watch the Demo →</a>
+  </section>
+
+  <footer>
+    <p>© 2026 · AI Intake Systems · Questions? Email: CONTACT_EMAIL</p>
+  </footer>
+
+</body>
+</html>
