@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PI Firm Intake Speed Audit — How Much Revenue Are You Losing?</title>
+  <meta name="description" content="Free 60-second audit for personal injury law firms. Find out how many cases your slow intake is costing you."/>
+  <meta property="og:title" content="Is Your Law Firm Losing $150K/Month to Slow Intake?"/>
+  <meta property="og:description" content="Take the 60-second PI Intake Audit. Get your score and find out exactly how many cases you're missing."/>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0a0a;color:#f0f0f0;min-height:100vh}
+    .hero{background:linear-gradient(135deg,#0f1a2e,#0a0a0a);padding:60px 24px;text-align:center;border-bottom:1px solid #1e3a5f}
+    .hero .tag{display:inline-block;background:#1e3a5f;color:#60a5fa;border:1px solid #3b82f6;border-radius:20px;padding:6px 16px;font-size:13px;margin-bottom:24px}
+    .hero h1{font-size:clamp(26px,4vw,48px);font-weight:800;color:#fff;margin-bottom:16px;line-height:1.2}
+    .hero h1 span{color:#ef4444}
+    .hero p{font-size:17px;color:#94a3b8;max-width:560px;margin:0 auto 8px}
+    .hero .sub{font-size:13px;color:#475569;margin-top:8px}
+    .quiz-wrap{max-width:640px;margin:40px auto;padding:0 24px 80px}
+    .question{background:#111827;border:1px solid #1f2937;border-radius:16px;padding:32px;display:none}
+    .question.active{display:block;animation:fadeIn 0.4s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    .q-num{font-size:12px;color:#475569;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+    .q-text{font-size:20px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.4}
+    .q-sub{font-size:14px;color:#64748b;margin-bottom:24px}
+    .options{display:flex;flex-direction:column;gap:10px}
+    .opt{background:#1f2937;border:1px solid #374151;border-radius:10px;padding:16px 20px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:12px}
+    .opt:hover{border-color:#3b82f6;background:#1e3a5f}
+    .opt .icon{font-size:22px;flex-shrink:0}
+    .opt .label{font-size:15px;font-weight:600;color:#e2e8f0}
+    .opt .desc{font-size:12px;color:#64748b;margin-top:2px}
+    .progress{background:#1f2937;border-radius:999px;height:4px;margin-bottom:32px;overflow:hidden}
+    .progress-fill{background:#3b82f6;height:100%;border-radius:999px;transition:width 0.4s ease}
+
+    /* Results */
+    .result{display:none;animation:fadeIn 0.5s ease}
+    .result.active{display:block}
+    .score-card{background:#111827;border-radius:16px;padding:36px;text-align:center;margin-bottom:24px}
+    .grade{font-size:80px;font-weight:900;line-height:1}
+    .grade.A{color:#22c55e} .grade.B{color:#eab308} .grade.C{color:#f97316} .grade.D{color:#ef4444}
+    .grade-label{font-size:16px;color:#94a3b8;margin-top:8px}
+    .loss-box{background:#1a0a0a;border:1px solid #ef4444;border-radius:12px;padding:24px;margin:20px 0;text-align:center}
+    .loss-box .amount{font-size:42px;font-weight:900;color:#ef4444}
+    .loss-box .label{font-size:14px;color:#9ca3af;margin-top:4px}
+    .insights{display:flex;flex-direction:column;gap:12px;margin:24px 0}
+    .insight{background:#1f2937;border-radius:10px;padding:16px 20px;display:flex;gap:16px;align-items:flex-start}
+    .insight .ico{font-size:24px;flex-shrink:0}
+    .insight .text{font-size:14px;color:#d1d5db;line-height:1.6}
+    .insight .text strong{color:#fff}
+    .cta-box{background:linear-gradient(135deg,#1e3a5f,#0f1a2e);border:1px solid #3b82f6;border-radius:16px;padding:36px;text-align:center}
+    .cta-box h2{font-size:24px;font-weight:700;margin-bottom:12px}
+    .cta-box p{color:#94a3b8;margin-bottom:24px;font-size:15px}
+    .btn{display:inline-block;background:#3b82f6;color:#fff;font-weight:700;font-size:17px;padding:16px 36px;border-radius:8px;text-decoration:none;cursor:pointer;border:none;transition:background 0.2s}
+    .btn:hover{background:#2563eb}
+    .btn-ghost{background:transparent;border:1px solid #374151;color:#94a3b8;margin-left:12px;font-size:15px;padding:14px 28px}
+    .share-line{margin-top:20px;font-size:13px;color:#475569}
+    .benchmark{background:#0f1a0a;border:1px solid #166534;border-radius:10px;padding:16px 20px;margin:16px 0;font-size:13px;color:#86efac}
+  </style>
+</head>
+<body>
+<div class="hero">
+  <div class="tag">⚡ Free 60-Second Audit</div>
+  <h1>Is Your PI Firm Losing <span>$150K/Month</span> to Slow Lead Response?</h1>
+  <p>Answer 5 quick questions. Get your intake score and exact revenue impact.</p>
+  <div class="sub">Used by 200+ PI firms • No signup required</div>
+</div>
+
+<div class="quiz-wrap">
+  <div class="progress"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+
+  <!-- Q1 -->
+  <div class="question active" id="q1">
+    <div class="q-num">Question 1 of 5</div>
+    <div class="q-text">How long does it typically take your firm to respond to a new web/phone lead?</div>
+    <div class="q-sub">Be honest — this determines your score</div>
+    <div class="options">
+      <div class="opt" onclick="answer(1,'A',10)"><div class="icon">⚡</div><div><div class="label">Under 5 minutes</div><div class="desc">Automated or someone always available</div></div></div>
+      <div class="opt" onclick="answer(1,'B',7)"><div class="icon">🕐</div><div><div class="label">5–60 minutes</div><div class="desc">We try to be quick but it varies</div></div></div>
+      <div class="opt" onclick="answer(1,'C',4)"><div class="icon">📅</div><div><div class="label">Same business day</div><div class="desc">Usually within a few hours</div></div></div>
+      <div class="opt" onclick="answer(1,'D',1)"><div class="icon">😬</div><div><div class="label">Next day or longer</div><div class="desc">We get to it when we can</div></div></div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question" id="q2">
+    <div class="q-num">Question 2 of 5</div>
+    <div class="q-text">What happens to leads that come in after hours (evenings, weekends)?</div>
+    <div class="options">
+      <div class="opt" onclick="answer(2,'A',10)"><div class="icon">🤖</div><div><div class="label">Auto-response + qualification</div><div class="desc">System handles it immediately</div></div></div>
+      <div class="opt" onclick="answer(2,'B',6)"><div class="icon">📲</div><div><div class="label">Get notified, respond next morning</div><div class="desc">We check in first thing</div></div></div>
+      <div class="opt" onclick="answer(2,'C',2)"><div class="icon">📬</div><div><div class="label">Sit in inbox until Monday</div><div class="desc">Someone eventually gets to it</div></div></div>
+      <div class="opt" onclick="answer(2,'D',0)"><div class="icon">❌</div><div><div class="label">We have no after-hours coverage</div><div class="desc">They call back or go elsewhere</div></div></div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question" id="q3">
+    <div class="q-num">Question 3 of 5</div>
+    <div class="q-text">How many new leads does your firm receive per month (calls, forms, referrals)?</div>
+    <div class="options">
+      <div class="opt" onclick="answer(3,'sm',20)"><div class="icon">📊</div><div><div class="label">Fewer than 20</div><div class="desc">Small or newer practice</div></div></div>
+      <div class="opt" onclick="answer(3,'md',50)"><div class="icon">📊</div><div><div class="label">20–50</div><div class="desc">Steady flow</div></div></div>
+      <div class="opt" onclick="answer(3,'lg',100)"><div class="icon">📊</div><div><div class="label">50–100</div><div class="desc">Active marketing</div></div></div>
+      <div class="opt" onclick="answer(3,'xl',200)"><div class="icon">📊</div><div><div class="label">100+</div><div class="desc">Heavy advertising spend</div></div></div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question" id="q4">
+    <div class="q-num">Question 4 of 5</div>
+    <div class="q-text">What's your current intake process for new leads?</div>
+    <div class="options">
+      <div class="opt" onclick="answer(4,'A',10)"><div class="icon">🤖</div><div><div class="label">Automated system (CRM + intake form)</div><div class="desc">Leads go into a workflow automatically</div></div></div>
+      <div class="opt" onclick="answer(4,'B',6)"><div class="icon">👩‍💼</div><div><div class="label">Dedicated intake person</div><div class="desc">Someone handles calls/forms full time</div></div></div>
+      <div class="opt" onclick="answer(4,'C',3)"><div class="icon">👤</div><div><div class="label">Attorney or paralegal handles it</div><div class="desc">When they have time</div></div></div>
+      <div class="opt" onclick="answer(4,'D',0)"><div class="icon">📋</div><div><div class="label">Whoever answers the phone</div><div class="desc">No formal process</div></div></div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="question" id="q5">
+    <div class="q-num">Question 5 of 5</div>
+    <div class="q-text">Do you know your lead-to-signed-case conversion rate?</div>
+    <div class="options">
+      <div class="opt" onclick="answer(5,'A',10)"><div class="icon">📈</div><div><div class="label">Yes, we track it closely</div><div class="desc">We know our numbers</div></div></div>
+      <div class="opt" onclick="answer(5,'B',5)"><div class="icon">📉</div><div><div class="label">Roughly — it's around 20-30%</div><div class="desc">We have some sense of it</div></div></div>
+      <div class="opt" onclick="answer(5,'C',2)"><div class="icon">🤷</div><div><div class="label">Not really sure</div><div class="desc">We don't track this closely</div></div></div>
+      <div class="opt" onclick="answer(5,'D',0)"><div class="icon">❓</div><div><div class="label">We don't track it at all</div><div class="desc">Hard to say</div></div></div>
+    </div>
+  </div>
+
+  <!-- Result -->
+  <div class="result" id="result">
+    <div class="score-card">
+      <div class="grade" id="grade-letter">C</div>
+      <div class="grade-label" id="grade-label">Your Intake Score</div>
+    </div>
+
+    <div class="loss-box">
+      <div class="amount" id="loss-amount">$87,500</div>
+      <div class="label">Estimated revenue lost to slow intake per month</div>
+    </div>
+
+    <div class="benchmark">
+      📊 Industry benchmark: Firms responding within 5 minutes are <strong>2.4x more likely to sign a case</strong>. Average firm response time: <strong>15.3 hours</strong> (Harvard Law, 2024).
+    </div>
+
+    <div class="insights" id="insights"></div>
+
+    <div class="cta-box">
+      <h2>Fix Your Intake Score — In 5 Days</h2>
+      <p>We build AI intake systems that respond in 90 seconds, 24/7. Most firms recoup the cost with a single additional signed case.</p>
+      <a href="demo.html" class="btn">See Live Demo First →</a>
+      <a href="#contact-form" class="btn btn-ghost">Get Pricing</a>
+      <div class="share-line">Share your score: <a href="#" onclick="shareScore()" style="color:#3b82f6">Copy link</a></div>
+    </div>
+  </div>
+
+  <!-- Inline contact form at bottom -->
+  <div id="contact-form" style="margin-top:40px;display:none">
+    <h3 style="margin-bottom:16px;font-size:20px">Get Pricing for Your Firm</h3>
+    <form id="auditContactForm" style="display:flex;flex-direction:column;gap:12px">
+      <input type="text" id="ac-name" placeholder="Your name" required style="background:#1f2937;border:1px solid #374151;border-radius:8px;padding:14px 16px;color:#f0f0f0;font-size:15px;outline:none">
+      <input type="email" id="ac-email" placeholder="Work email" required style="background:#1f2937;border:1px solid #374151;border-radius:8px;padding:14px 16px;color:#f0f0f0;font-size:15px;outline:none">
+      <input type="tel" id="ac-phone" placeholder="Phone" style="background:#1f2937;border:1px solid #374151;border-radius:8px;padding:14px 16px;color:#f0f0f0;font-size:15px;outline:none">
+      <button type="submit" style="background:#3b82f6;color:#fff;border:none;border-radius:8px;padding:14px;font-size:15px;font-weight:700;cursor:pointer">Send Me Pricing →</button>
+      <p id="ac-status" style="text-align:center;color:#22c55e;display:none">✓ Got it! We'll reach out within 24 hours.</p>
+    </form>
+  </div>
+</div>
+
+<script>
+const answers = {};
+let totalScore = 0;
+let leadVolume = 50;
+
+function answer(q, val, score) {
+  answers[q] = {val, score};
+  if (q === 3) leadVolume = score; // store lead volume separately
+
+  const prog = Math.min(q * 20, 100);
+  document.getElementById('prog').style.width = prog + '%';
+
+  document.getElementById('q'+q).classList.remove('active');
+
+  if (q < 5) {
+    setTimeout(() => document.getElementById('q'+(q+1)).classList.add('active'), 100);
+  } else {
+    setTimeout(showResult, 200);
+  }
+}
+
+function showResult() {
+  document.getElementById('prog').style.width = '100%';
+
+  // Calculate score (excluding lead volume answer which is data, not quality)
+  const scoreKeys = [1,2,4,5];
+  const total = scoreKeys.reduce((sum, k) => sum + (answers[k]?.score || 0), 0);
+  const maxScore = 40;
+  const pct = total / maxScore;
+
+  let grade, gradeLabel, gradeClass;
+  if (pct >= 0.85) { grade='A'; gradeLabel='Excellent Intake'; gradeClass='A'; }
+  else if (pct >= 0.65) { grade='B'; gradeLabel='Good — Room to Improve'; gradeClass='B'; }
+  else if (pct >= 0.40) { grade='C'; gradeLabel='Below Average — Losing Cases'; gradeClass='C'; }
+  else { grade='D'; gradeLabel='Critical — Major Revenue Loss'; gradeClass='D'; }
+
+  document.getElementById('grade-letter').textContent = grade;
+  document.getElementById('grade-letter').className = 'grade ' + gradeClass;
+  document.getElementById('grade-label').textContent = gradeLabel;
+
+  // Calculate revenue loss
+  const avgCaseValue = 35000; // average PI contingency
+  const missRate = pct >= 0.85 ? 0.05 : pct >= 0.65 ? 0.15 : pct >= 0.40 ? 0.30 : 0.50;
+  const monthlyLoss = Math.round(leadVolume * missRate * avgCaseValue * 0.35 / 100) * 100; // 35% attorney fee
+  document.getElementById('loss-amount').textContent = '$' + monthlyLoss.toLocaleString();
+
+  // Generate insights
+  const insights = [];
+  if (answers[1]?.score < 7) insights.push({ico:'⏱️', text:'<strong>Response time</strong> is your biggest vulnerability. Studies show a firm responding in 5 minutes vs 60 minutes is 7x more likely to reach the prospect.'});
+  if (answers[2]?.score < 6) insights.push({ico:'🌙', text:'<strong>After-hours leads</strong> are your competitor\'s best friend. 40% of PI leads come in outside business hours — and most go to whoever calls back first.'});
+  if (answers[4]?.score < 6) insights.push({ico:'📋', text:'<strong>No formal intake process</strong> means inconsistent qualification. You\'re likely spending time on weak cases while strong ones go elsewhere.'});
+  if (answers[5]?.score < 5) insights.push({ico:'📊', text:'<strong>Without tracking conversion rate</strong>, you can\'t improve it. Most firms have no idea they\'re operating at 15-20% when 35%+ is achievable.'});
+  if (insights.length === 0) insights.push({ico:'✅', text:'Your intake is above average! But even a 10% improvement in response speed could add $20K+/month at your volume.'});
+
+  const container = document.getElementById('insights');
+  container.innerHTML = insights.map(i => `<div class="insight"><div class="ico">${i.ico}</div><div class="text">${i.text}</div></div>`).join('');
+
+  document.getElementById('result').classList.add('active');
+  document.getElementById('contact-form').style.display = 'block';
+  document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
+
+function shareScore() {
+  navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied! Share it with your colleagues.')).catch(() => {});
+}
+
+document.getElementById('auditContactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('button');
+  btn.disabled = true; btn.textContent = 'Sending...';
+  try {
+    await fetch('http://139.84.176.158:7777/contact', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        name: document.getElementById('ac-name').value,
+        email: document.getElementById('ac-email').value,
+        phone: document.getElementById('ac-phone').value,
+        message: 'Audit lead — Grade: ' + (document.getElementById('grade-letter').textContent || '?') + ' | Loss: ' + document.getElementById('loss-amount').textContent,
+        source: 'PI Intake Audit Tool'
+      })
+    });
+    document.getElementById('ac-status').style.display = 'block';
+    this.reset();
+  } catch(err) {}
+  btn.disabled = false; btn.textContent = 'Send Me Pricing →';
+});
+</script>
+</body>
+</html>
