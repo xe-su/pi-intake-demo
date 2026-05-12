@@ -175,8 +175,8 @@
     <h1>Stop Losing Cases to <span>Slow Follow-Up</span></h1>
     <p>Your AI intake bot captures every lead, qualifies cases instantly, and books consultations — 24/7, while you sleep.</p>
     <div class="hero-btns">
-      <a href="LOOM_DEMO_LINK" class="btn-primary">Watch 2-Min Demo →</a>
-      <a href="CONTACT_LINK" class="btn-secondary">Get a Quote</a>
+      <a href="demo.html" class="btn-primary">Watch 2-Min Demo →</a>
+      <a href="#contact" class="btn-secondary">Get a Quote</a>
     </div>
   </section>
 
@@ -320,7 +320,7 @@
           <li>Lead log (Google Sheet)</li>
           <li>Monthly report</li>
         </ul>
-        <a href="CONTACT_LINK" class="cta-btn">Get Started</a>
+        <a href="#contact" class="cta-btn">Get Started</a>
       </div>
       <div class="plan featured">
         <div class="featured-badge">Most Popular</div>
@@ -335,20 +335,67 @@
           <li>Unqualified lead referral automation</li>
           <li>Bi-weekly optimization calls</li>
         </ul>
-        <a href="CONTACT_LINK" class="cta-btn">Get Started</a>
+        <a href="#contact" class="cta-btn">Get Started</a>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
   <section class="cta-section">
-    <h2>See It Working on Your Firm's Demo</h2>
-    <p>Watch a 2-minute Loom showing exactly how the bot handles a car accident intake. No calls required.</p>
-    <a href="LOOM_DEMO_LINK" class="btn-primary" style="font-size:18px;padding:18px 44px;">Watch the Demo →</a>
+    <h2>See It Working — Try the Live Bot</h2>
+    <p>Interact with the actual bot right now. Pretend you're a car accident victim and watch it qualify you for a consultation.</p>
+    <a href="demo.html" class="btn-primary" style="font-size:18px;padding:18px 44px;">Try Live Demo →</a>
+  </section>
+
+  <!-- Contact Form -->
+  <section id="contact" style="padding:80px 24px;background:#0a0a0a;max-width:600px;margin:0 auto">
+    <h2 style="text-align:center;font-size:28px;margin-bottom:8px">Get Started</h2>
+    <p style="text-align:center;color:#64748b;margin-bottom:32px">We'll set up your AI intake bot in 5 days. No long-term contracts.</p>
+    <form id="contactForm" style="display:flex;flex-direction:column;gap:16px">
+      <input type="text" id="cf-name" placeholder="Your name" required style="background:#1f2937;border:1px solid #374151;border-radius:8px;padding:14px 16px;color:#f0f0f0;font-size:15px;outline:none">
+      <input type="email" id="cf-email" placeholder="Work email" required style="background:#1f2937;border:1px solid #374151;border-radius:8px;padding:14px 16px;color:#f0f0f0;font-size:15px;outline:none">
+      <input type="tel" id="cf-phone" placeholder="Phone (optional)" style="background:#1f2937;border:1px solid #374151;border-radius:8px;padding:14px 16px;color:#f0f0f0;font-size:15px;outline:none">
+      <textarea id="cf-msg" placeholder="Tell us about your firm — location, size, main challenge with intake?" rows="4" style="background:#1f2937;border:1px solid #374151;border-radius:8px;padding:14px 16px;color:#f0f0f0;font-size:15px;outline:none;resize:vertical"></textarea>
+      <button type="submit" id="cf-submit" style="background:#3b82f6;color:#fff;border:none;border-radius:8px;padding:16px;font-size:16px;font-weight:700;cursor:pointer">Send Message →</button>
+      <p id="cf-status" style="text-align:center;color:#22c55e;display:none">✓ Message sent! We'll respond within 24 hours.</p>
+    </form>
+    <script>
+      document.getElementById('contactForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('cf-submit');
+        btn.disabled = true; btn.textContent = 'Sending...';
+        try {
+          await fetch('https://xe-su.github.io/pi-intake-demo/demo.html'.replace('demo.html','') + '../../../', {});
+        } catch(e) {}
+        // Try contact endpoint — works if user just tried demo (same tunnel)
+        const CONTACT_URL = sessionStorage.getItem('contactUrl') || 'http://139.84.176.158:7777/contact';
+        try {
+          const res = await fetch(CONTACT_URL, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              name: document.getElementById('cf-name').value,
+              email: document.getElementById('cf-email').value,
+              phone: document.getElementById('cf-phone').value,
+              message: document.getElementById('cf-msg').value,
+              source: 'PI Law Firm Landing Page'
+            })
+          });
+          if(res.ok) {
+            document.getElementById('cf-status').style.display = 'block';
+            document.getElementById('contactForm').reset();
+          }
+        } catch(err) {
+          // Fallback: open email client
+          window.location.href = 'mailto:contact@aiintakesystems.com?subject=PI Intake Bot Inquiry&body=' + encodeURIComponent(document.getElementById('cf-msg').value);
+        }
+        btn.disabled = false; btn.textContent = 'Send Message →';
+      });
+    </script>
   </section>
 
   <footer>
-    <p>© 2026 · AI Intake Systems · Questions? Email: CONTACT_EMAIL</p>
+    <p>© 2026 · AI Intake Systems · <a href="demo.html" style="color:#3b82f6">Try Demo</a></p>
   </footer>
 
 </body>
